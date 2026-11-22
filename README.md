@@ -1,7 +1,9 @@
 # Mood Garden
 
 A calm, private mood garden. Works fully offline and without an account; gardens are saved in the browser.
-Optional: sign in with an email link to sync gardens across devices.
+**Live app:** [mood-garden-4rt.pages.dev](https://mood-garden-4rt.pages.dev)
+
+Optional: sign in with an email code to sync gardens across devices.
 
 ## Screenshots
 
