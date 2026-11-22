@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mood Garden · Landing mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --moss:#5E7D4F; --cream:#F7F0DF; --ink:#3E4A38; --serif:'Fraunces',Georgia,serif; --sans:'Figtree',system-ui,sans-serif; --hand:'Caveat',cursive; }
+  * { box-sizing: border-box; } body { margin: 0; background: #e9efdf; font-family: var(--sans); color: var(--ink); padding: 40px 24px 80px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 34px; margin: 0 0 6px; text-align: center; } .sub { text-align: center; margin: 0 0 44px; color: #6E7A64; font-family: var(--serif); font-style: italic; }
+  .wrap { max-width: 1100px; margin: 0 auto 64px; } .tag { display: flex; gap: 12px; align-items: baseline; margin-bottom: 12px; } .tag b { font-family: var(--serif); font-size: 22px; font-weight: 500; } .tag span { color: #6E7A64; font-size: 14px; }
+  .tag i { font-style: normal; background: var(--moss); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center; font-size: 14px; flex: none; align-self: center; }
+  .frame { position: relative; aspect-ratio: 16/10; border-radius: 22px; overflow: hidden; box-shadow: 0 24px 60px rgba(40,60,30,.35), 0 0 0 6px #fff; background: #b8dca0; }
+  .frame > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .ov { position: absolute; inset: 0; pointer-events: none; } .ov > * { pointer-events: auto; }
+  .btn { border: 0; border-radius: 30px; padding: 14px 34px; font-family: var(--serif); font-size: 20px; color: #fbf6e8; background: radial-gradient(circle at 35% 25%, #8FB27A, #4F7A44 75%); box-shadow: 0 8px 20px rgba(30,60,30,.45), inset 0 -3px 0 rgba(0,0,0,.15), 0 0 0 3px #F7F0DF; cursor: pointer; }
+  .wordmark { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; }
+  .center { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; }
+  .note { font-size: 13px; color: #6E7A64; margin: 12px 4px 0; line-height: 1.5; }
+  @keyframes fall { from { transform: translate(0,-40px) rotate(0) } to { transform: translate(60px,520px) rotate(300deg) } }
+  @keyframes sway { 0%,100% { transform: rotate(-2deg) } 50% { transform: rotate(2deg) } }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+  @keyframes tw { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+  .petal { animation: fall linear infinite; } .sw { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite; } .bob { animation: bob 6s ease-in-out infinite; } .tw { animation: tw 3s infinite; }
+  .bubbles { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .bubble { width: 74px; text-align: center; font-family: var(--serif); font-size: 13px; }
+  .bubble .b { width: 62px; height: 62px; margin: 0 auto 4px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, var(--c) 78%); border: 3px solid #fff; box-shadow: 0 4px 10px rgba(40,60,30,.3); display: grid; place-items: center; }
+  .page { position: absolute; background: #fbf5e4; }
+</style>
+</head>
+<body>
+<h1>Landing page directions</h1>
+<p class="sub">Four ways to open Mood Garden. The garden stays the star in all of them.</p>
+
+<!-- shared illustrated parts -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <radialGradient id="gloss" cx=".35" cy=".3" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glow"><stop offset="0" stop-color="#FFF3C2" stop-opacity=".95"/><stop offset="1" stop-color="#FFF3C2" stop-opacity="0"/></radialGradient>
+  <g id="leaf"><path d="M0 0 C 5 -7 15 -7 20 0 C 15 7 5 7 0 0Z" fill="#4DAE5A" stroke="#2f7a3d" stroke-opacity=".4"/><path d="M1 0 L17 0" stroke="#fff" stroke-opacity=".3"/></g>
+  <g id="daisy"><path d="M0 0 Q2 -20 0 -42" stroke="#4a9a4f" stroke-width="2.6" fill="none"/><use href="#leaf" transform="translate(0 -14) rotate(-35)"/><use href="#leaf" transform="translate(0 -22) scale(-1 1) rotate(-35)"/>
+    <g transform="translate(0 -46)"><g fill="#fffaf0" stroke="#d9cba7" stroke-width=".5"><ellipse cy="-8" rx="3" ry="8"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(30)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(60)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(90)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(120)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(150)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(180)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(210)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(240)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(270)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(300)"/><ellipse cy="-8" rx="3" ry="8" transform="rotate(330)"/></g><circle r="5" fill="#F0B83A"/><circle cx="-1.5" cy="-1.5" r="2" fill="#fbe08a"/></g></g>
+  <g id="sunflower"><path d="M0 0 Q2 -26 0 -58" stroke="#4a9a4f" stroke-width="3.2" fill="none"/><use href="#leaf" transform="translate(0 -18) rotate(-30) scale(1.3)"/><use href="#leaf" transform="translate(0 -28) scale(-1.3 1.3) rotate(-30)"/>
+    <g transform="translate(0 -64)"><g fill="#F2B83A" stroke="#c98d1f" stroke-width=".5"><ellipse cy="-14" rx="4.5" ry="11"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(25)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(50)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(75)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(100)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(125)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(150)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(175)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(200)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(225)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(250)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(275)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(300)"/><ellipse cy="-14" rx="4.5" ry="11" transform="rotate(325)"/></g><circle r="11" fill="#6B4829"/><circle r="7" fill="#54361F"/><ellipse cx="-4" cy="-5" rx="6" ry="3.5" fill="url(#gloss)"/></g></g>
+  <g id="rose"><path d="M0 0 Q2 -14 0 -26" stroke="#3b8c48" stroke-width="3" fill="none"/><use href="#leaf" transform="translate(0 -8) rotate(-30)"/><use href="#leaf" transform="translate(0 -12) scale(-1 1) rotate(-30)"/>
+    <g transform="translate(0 -32)"><circle r="14" fill="#B92B4E"/><g fill="#E5546F" stroke="#B92B4E" stroke-width=".6"><circle cx="9" cy="0" r="7"/><circle cx="4.5" cy="7.8" r="7"/><circle cx="-4.5" cy="7.8" r="7"/><circle cx="-9" cy="0" r="7"/><circle cx="-4.5" cy="-7.8" r="7"/><circle cx="4.5" cy="-7.8" r="7"/></g><circle r="6" fill="#F58AA0" stroke="#B92B4E" stroke-width=".6"/><path d="M-2 0 a2 2 0 1 1 2 2 a4 4 0 1 1 -4 -4" fill="none" stroke="#B92B4E" stroke-width="1"/><ellipse cx="-4" cy="-6" rx="6" ry="3.4" fill="url(#gloss)"/></g></g>
+  <g id="lav"><path d="M0 0 Q1 -20 0 -44" stroke="#5aa05a" stroke-width="2" fill="none"/><g fill="#A58BE0"><ellipse cx="-2" cy="-34" rx="2.6" ry="4"/><ellipse cx="2" cy="-30" rx="2.6" ry="4"/><ellipse cx="-2" cy="-26" rx="2.6" ry="4"/><ellipse cx="2" cy="-38" rx="2.6" ry="4"/><ellipse cx="-2" cy="-42" rx="2.4" ry="3.6"/><ellipse cx="0" cy="-47" rx="2" ry="3"/><ellipse cx="2" cy="-22" rx="2.6" ry="4"/></g></g>
+  <g id="bell"><path d="M0 0 Q2 -26 14 -42" stroke="#4a9a4f" stroke-width="2.4" fill="none"/><g fill="#7FA6E6" stroke="#4f74b8" stroke-width=".6"><path d="M14 -42 q-6 3 -7 11 q7 3 14 0 q-1 -8 -7 -11Z"/><path d="M8 -30 q-6 3 -7 11 q7 3 14 0 q-1 -8 -7 -11Z"/></g></g>
+  <g id="cosmos"><path d="M0 0 Q4 -22 0 -46" stroke="#4a9a4f" stroke-width="2.2" fill="none"/><g transform="translate(0 -50)"><g fill="#F08A68" stroke="#c0603f" stroke-width=".5"><ellipse cy="-9" rx="5.5" ry="9"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(45)"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(90)"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(135)"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(180)"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(225)"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(270)"/><ellipse cy="-9" rx="5.5" ry="9" transform="rotate(315)"/></g><circle r="4" fill="#F0B83A"/></g></g>
+  <g id="cloud"><ellipse rx="60" ry="16" fill="#fffaf0"/><ellipse cx="-28" cy="-10" rx="30" ry="20" fill="#fffaf0"/><ellipse cx="12" cy="-18" rx="36" ry="24" fill="#fffaf0"/><ellipse cx="42" cy="-4" rx="26" ry="14" fill="#fffaf0"/></g>
+  <g id="treehouse"><path d="M-46 0 C-36 -30 -34 -90 -26 -150 L26 -150 C34 -90 38 -30 50 0Z" fill="#5D7266"/><path d="M-30 -120 Q-20 -70 -34 -20 M14 -140 Q22 -80 30 -30" stroke="#2c3a33" stroke-opacity=".3" stroke-width="2" fill="none"/>
+    <g id="win"><path d="M-7 8 V-4 Q0 -14 7 -4 V8Z" fill="#FFE6A0" stroke="#E7F0EA" stroke-width="2.4"/></g><use href="#win" transform="translate(-4 -112)"/><use href="#win" transform="translate(10 -86)"/><use href="#win" transform="translate(-10 -62)"/><use href="#win" transform="translate(4 -38)"/>
+    <path d="M-20 0 V-26 Q0 -44 20 -26 V0Z" fill="#6B4E3A" stroke="#d9cdb2" stroke-width="3"/><path d="M-26 -30 L0 -52 L26 -30Q0 -24 -26 -30Z" fill="#6E8892"/>
+    <g fill="#5BB85F"><circle cx="-60" cy="-150" r="44"/><circle cx="0" cy="-176" r="54"/><circle cx="62" cy="-148" r="44"/><circle cx="-24" cy="-140" r="40"/><circle cx="30" cy="-140" r="40"/></g><g fill="#fff" opacity=".14"><circle cx="-72" cy="-166" r="24"/><circle cx="-12" cy="-196" r="30"/><circle cx="48" cy="-164" r="24"/></g>
+    <g fill="#F7C9CF"><circle cx="-60" cy="-160" r="3"/><circle cx="-20" cy="-190" r="3"/><circle cx="30" cy="-175" r="3"/><circle cx="70" cy="-150" r="3"/><circle cx="-44" cy="-132" r="3"/><circle cx="10" cy="-150" r="3"/></g></g>
+</defs></svg>
+
+<!-- 1. GATE -->
+<section class="wrap">
+  <div class="tag"><i>1</i><b>The Garden Gate</b><span>A ceremonial first impression · enter with one tap</span></div>
+  <div class="frame" id="f1">
+    <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="g1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FD3E6"/><stop offset="1" stop-color="#F8EBC6"/></linearGradient>
+        <radialGradient id="g1ground" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#A6EA7A"/><stop offset="1" stop-color="#3FA652"/></radialGradient>
+        <mask id="arch"><rect width="800" height="500" fill="#fff"/><path d="M270 500 V210 Q270 70 400 70 Q530 70 530 210 V500Z" fill="#000"/></mask>
+        <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E6F3E"/><stop offset="1" stop-color="#2F8E4B"/></linearGradient>
+      </defs>
+      <!-- the garden seen through the arch -->
+      <rect width="800" height="500" fill="url(#g1sky)"/>
+      <circle cx="400" cy="130" r="70" fill="url(#glow)"/><circle cx="400" cy="130" r="22" fill="#FFF6D0"/>
+      <use href="#cloud" transform="translate(330 120) scale(.6)"/><use href="#cloud" transform="translate(500 90) scale(.5)"/>
+      <path d="M200 300 C300 250 360 280 420 262 S520 250 620 290 V500 H200Z" fill="#8FD07A"/>
+      <rect y="300" width="800" height="200" fill="url(#g1ground)"/>
+      <path d="M400 500 C395 440 380 400 372 360" stroke="#E8DCC0" stroke-width="64" stroke-linecap="round" fill="none"/>
+      <use href="#treehouse" transform="translate(440 330) scale(.7)"/>
+      <ellipse cx="470" cy="410" rx="70" ry="20" fill="#7FC4D6" stroke="#d8cfb8" stroke-width="4"/>
+      <g id="g1f"></g>
+      <!-- foliage wall with arch cut-out -->
+      <g mask="url(#arch)"><rect width="800" height="500" fill="url(#wall)"/>
+        <g id="g1leaves" opacity=".9"></g></g>
+      <path d="M262 500 V210 Q262 62 400 62 Q538 62 538 210 V500" fill="none" stroke="#CFC9B4" stroke-width="16"/>
+      <path d="M262 500 V210 Q262 62 400 62 Q538 62 538 210 V500" fill="none" stroke="#A7A18C" stroke-width="3" stroke-dasharray="14 10"/>
+      <path d="M386 60 H414 V82 H386Z" fill="#B8B29C"/>
+      <g id="g1roses"></g>
+      <g id="g1petals"></g>
+    </svg>
+    <div class="ov">
+      <div class="center" style="top:6%;color:#F7F0DF;text-shadow:0 2px 18px rgba(10,50,20,.6)"><div class="wordmark" style="font-size:44px">Mood Garden</div></div>
+      <div class="center" style="bottom:7%;text-align:center"><div style="font-family:var(--serif);font-style:italic;color:#fff;font-size:19px;margin-bottom:14px;text-shadow:0 2px 12px rgba(10,50,20,.7)">A garden that makes room for everything.</div><button class="btn">Step inside</button></div>
+    </div>
+  </div>
+  <p class="note">Warm, storybook, and calm. The ivy-and-stone arch frames the real garden behind it, petals drift past the gate, and the single button feels like opening a door. Best for first visit and as a quiet splash every time you return.</p>
+</section>
+
+<!-- 2. GARDEN + INLINE BLOOM PICKER -->
+<section class="wrap">
+  <div class="tag"><i>2</i><b>Straight into the Garden</b><span>The garden is the page · a one-tap mood picker floats on top</span></div>
+  <div class="frame" id="f2">
+    <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="g2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FD3E6"/><stop offset="1" stop-color="#F8EBC6"/></linearGradient>
+      <radialGradient id="g2g" cx=".5" cy=".4" r=".8"><stop offset="0" stop-color="#A6EA7A"/><stop offset="1" stop-color="#3FA652"/></radialGradient></defs>
+      <rect width="800" height="140" fill="url(#g2sky)"/><circle cx="560" cy="60" r="34" fill="#FFF6D0"/><circle cx="560" cy="60" r="90" fill="url(#glow)"/>
+      <use href="#cloud" transform="translate(180 60) scale(.55)"/><use href="#cloud" transform="translate(690 40) scale(.4)"/>
+      <rect y="70" width="800" height="430" fill="url(#g2g)"/>
+      <g fill="#1E6F3E"><circle cx="40" cy="90" r="46"/><circle cx="110" cy="84" r="50"/><circle cx="190" cy="92" r="46"/><circle cx="280" cy="88" r="52"/><circle cx="380" cy="94" r="48"/><circle cx="470" cy="90" r="50"/><circle cx="560" cy="96" r="46"/><circle cx="650" cy="90" r="52"/><circle cx="750" cy="94" r="48"/></g>
+      <g fill="#2A8947"><circle cx="70" cy="110" r="40"/><circle cx="200" cy="112" r="42"/><circle cx="340" cy="110" r="42"/><circle cx="510" cy="112" r="40"/><circle cx="690" cy="110" r="42"/></g>
+      <path d="M130 360 C250 320 330 270 400 215 S520 150 560 140" stroke="#8d8b7e" stroke-width="64" fill="none" stroke-linecap="round"/><path d="M130 360 C250 320 330 270 400 215 S520 150 560 140" stroke="#D2CFBF" stroke-width="54" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/>
+      <path d="M130 360 C250 320 330 270 400 215 S520 150 560 140" stroke="#BDB9AA" stroke-width="54" fill="none" stroke-linecap="round" stroke-dasharray="16 12" opacity=".5"/>
+      <use href="#treehouse" transform="translate(120 330) scale(1)"/>
+      <path d="M470 400 L640 360 L760 410 L600 470Z" fill="#9CCFDD" stroke="#e0d8c2" stroke-width="8" stroke-linejoin="round"/>
+      <g id="g2f"></g>
+    </svg>
+    <div class="ov">
+      <div style="position:absolute;top:18px;left:22px;color:#fff;text-shadow:0 1px 12px rgba(10,50,20,.7)"><div class="wordmark" style="font-size:28px">Mood Garden</div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.9">Saturday · autumn · light rain</div></div>
+      <div class="center" style="bottom:5%;width:min(78%,640px);background:linear-gradient(#FFFBEB,#F2E6C4);border-radius:28px;border:3px solid #fff;padding:16px 20px 14px;box-shadow:0 14px 34px rgba(20,60,30,.45)">
+        <div style="font-family:var(--serif);font-size:22px;margin-bottom:2px">How does today feel?</div>
+        <div style="font-family:var(--serif);font-style:italic;font-size:13px;color:#6E7A64;margin-bottom:10px">Tap any that are true. Plant them in a moment.</div>
+        <div class="bubbles">
+          <div class="bubble"><div class="b" style="--c:#F2B83A"><svg width="34" height="40" viewBox="-30 -80 60 90"><use href="#sunflower"/></svg></div>Joy</div>
+          <div class="bubble"><div class="b" style="--c:#C9B6F0"><svg width="34" height="40" viewBox="-20 -60 40 70"><use href="#lav"/></svg></div>Calm</div>
+          <div class="bubble"><div class="b" style="--c:#A9C4F2"><svg width="34" height="40" viewBox="-14 -60 50 70"><use href="#bell"/></svg></div>Sadness</div>
+          <div class="bubble"><div class="b" style="--c:#F4A7B6"><svg width="34" height="40" viewBox="-24 -60 48 70"><use href="#rose"/></svg></div>Love</div>
+          <div class="bubble"><div class="b" style="--c:#F7B89A"><svg width="34" height="40" viewBox="-24 -70 48 80"><use href="#cosmos"/></svg></div>Excited</div>
+          <div class="bubble"><div class="b" style="--c:#FFF4D2"><svg width="34" height="40" viewBox="-20 -70 40 80"><use href="#daisy"/></svg></div>Grateful</div>
+          <div class="bubble"><div class="b" style="--c:#ECE6D3;font-size:22px;color:#6E7A64">+</div>More</div>
+        </div>
+        <div style="text-align:center;margin-top:10px;font-size:13px;color:#6E7A64">or just <u>wander the garden</u></div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Removes a step: the check-in lives on the landing screen, so a feeling can be planted in two taps and the new seed sprouts right behind the card. The card slides away to leave the full garden.</p>
+</section>
+
+<!-- 3. FLOATING ISLAND -->
+<section class="wrap">
+  <div class="tag"><i>3</i><b>The Floating Island</b><span>A little world you hold in your hands · diorama, not landscape</span></div>
+  <div class="frame" id="f3">
+    <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="g3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9BDEB"/><stop offset=".55" stop-color="#F6D3C9"/><stop offset="1" stop-color="#FCEBC9"/></linearGradient>
+      <radialGradient id="g3g" cx=".5" cy=".35" r=".75"><stop offset="0" stop-color="#B6F08A"/><stop offset="1" stop-color="#48B05A"/></radialGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8d6e57"/><stop offset=".5" stop-color="#B08D72"/><stop offset="1" stop-color="#7a5d48"/></linearGradient></defs>
+      <rect width="800" height="500" fill="url(#g3sky)"/>
+      <g id="g3stars"></g>
+      <use href="#cloud" transform="translate(110 120) scale(.7)" class="bob"/><use href="#cloud" transform="translate(700 190) scale(.6)" class="bob" style="animation-delay:-3s"/><use href="#cloud" transform="translate(640 80) scale(.4)"/><use href="#cloud" transform="translate(180 330) scale(.45)"/>
+      <g class="bob">
+        <path d="M150 270 Q160 360 260 410 Q300 470 400 480 Q500 470 540 410 Q640 360 650 270Z" fill="url(#rock)"/>
+        <path d="M260 410 Q290 380 280 330 M400 480 Q380 420 400 360 M540 410 Q510 380 520 330" stroke="#5c4636" stroke-opacity=".4" stroke-width="3" fill="none"/>
+        <g fill="#4CAF5A"><path d="M170 340 q-10 40 -4 60 q10 -20 8 -50z"/><path d="M620 340 q8 40 2 60 q-10 -20 -6 -50z"/></g>
+        <ellipse cx="400" cy="262" rx="262" ry="96" fill="url(#g3g)" stroke="#6BC45E" stroke-width="3"/>
+        <ellipse cx="400" cy="256" rx="240" ry="84" fill="#fff" opacity=".07"/>
+        <path d="M330 340 C 360 300 400 280 420 250" stroke="#E4D9BC" stroke-width="30" fill="none" stroke-linecap="round"/>
+        <path d="M470 270 L560 252 L610 280 L520 305Z" fill="#9CCFDD" stroke="#e0d8c2" stroke-width="6" stroke-linejoin="round"/>
+        <use href="#treehouse" transform="translate(290 262) scale(.62)"/>
+        <g id="g3f"></g>
+        <g transform="translate(404 246)"><rect x="-24" y="-8" width="48" height="6" rx="2" fill="#B08A64"/><rect x="-24" y="-24" width="48" height="4" fill="#9B7655"/><rect x="-22" y="-8" width="3" height="12" fill="#7C5C41"/><rect x="19" y="-8" width="3" height="12" fill="#7C5C41"/></g>
+      </g>
+      <g id="g3pet"></g>
+    </svg>
+    <div class="ov">
+      <div class="center" style="top:7%;text-align:center;color:#4a3d6b"><div class="wordmark" style="font-size:46px">Mood Garden</div><div style="font-family:var(--serif);font-style:italic;font-size:17px;opacity:.85">your feelings, growing</div></div>
+      <div class="center" style="bottom:6%;text-align:center"><button class="btn">Enter the garden</button><div style="margin-top:10px;font-size:13px;color:#5d5280">Saturday · autumn · a few clouds</div></div>
+    </div>
+  </div>
+  <p class="note">Most "game-like": the whole garden is one floating diorama that gently bobs. Tapping it zooms down into the full garden. Dawn/dusk skies change with the real time of day, and each new plant adds to the island.</p>
+</section>
+
+<!-- 4. STORYBOOK -->
+<section class="wrap">
+  <div class="tag"><i>4</i><b>The Storybook Opening</b><span>A diary spread · personal and quiet, feels like a keepsake</span></div>
+  <div class="frame" id="f4" style="background:linear-gradient(#8a6a4e,#6b4f38)">
+    <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+      <defs><radialGradient id="g4g" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#A6EA7A"/><stop offset="1" stop-color="#3FA652"/></radialGradient>
+      <clipPath id="clipR"><rect x="418" y="64" width="324" height="372" rx="8"/></clipPath>
+      <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity=".45"/></filter></defs>
+      <g stroke="#5a4130" stroke-opacity=".35"><path d="M0 60 H800 M0 150 H800 M0 250 H800 M0 350 H800 M0 450 H800"/></g>
+      <g filter="url(#shadow)"><path d="M50 56 Q225 40 400 64 Q575 40 750 56 V446 Q575 430 400 454 Q225 430 50 446Z" fill="#fbf5e4" stroke="#d8cba6" stroke-width="2"/><path d="M400 64 V454" stroke="#d8cba6" stroke-width="3"/><path d="M394 64 V454" stroke="#000" stroke-opacity=".06" stroke-width="12"/></g>
+      <path d="M392 46 V120 L400 108 L408 120 V46Z" fill="#C8505F" transform="translate(120 -2)"/>
+      <g clip-path="url(#clipR)">
+        <rect x="418" y="64" width="324" height="372" fill="#C8E3F0"/><circle cx="640" cy="120" r="26" fill="#FFF6D0"/>
+        <rect x="418" y="170" width="324" height="270" fill="url(#g4g)"/>
+        <g fill="#2A8947"><circle cx="440" cy="170" r="40"/><circle cx="520" cy="164" r="44"/><circle cx="610" cy="170" r="40"/><circle cx="700" cy="166" r="44"/></g>
+        <path d="M580 440 C 570 380 540 340 520 300" stroke="#E0D6BA" stroke-width="56" fill="none" stroke-linecap="round"/>
+        <use href="#treehouse" transform="translate(500 296) scale(.6)"/>
+        <path d="M600 360 L690 338 L740 372 L650 402Z" fill="#9CCFDD" stroke="#e0d8c2" stroke-width="6" stroke-linejoin="round"/>
+        <g id="g4f"></g>
+      </g>
+      <rect x="418" y="64" width="324" height="372" rx="8" fill="none" stroke="#fff" stroke-width="8"/><rect x="418" y="64" width="324" height="372" rx="8" fill="none" stroke="#D8C9A2" stroke-width="1.5"/>
+      <g transform="translate(396 54) rotate(-4)"><rect width="76" height="22" fill="#E9C882" opacity=".75"/></g><g transform="translate(700 420) rotate(6)"><rect width="70" height="20" fill="#E9C882" opacity=".75"/></g>
+      <g transform="translate(335 420) scale(.9)"><use href="#lav" transform="rotate(-10)"/><use href="#daisy" transform="translate(26 0) rotate(8)"/></g>
+    </svg>
+    <div class="ov">
+      <div style="position:absolute;left:11.5%;top:20%;width:34%">
+        <div style="font-family:var(--hand);font-size:30px;line-height:1">Saturday, 21 November</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6E7A64;margin:2px 0 12px">Autumn · light rain in the garden</div>
+        <div style="font-family:var(--serif);font-size:24px;font-weight:500;line-height:1.15;margin-bottom:8px">Welcome back.</div>
+        <div style="font-family:var(--serif);font-style:italic;font-size:14px;color:#55604d;line-height:1.5">Nothing wilted while you were away. The hosta grew a little, and something new is waiting by the mailbox.</div>
+        <div style="margin:14px 0 6px;padding:10px 12px;background:#F0E6C8;border-left:3px solid #8FB27A;font-family:var(--hand);font-size:20px;line-height:1.1">What made you smile unexpectedly?</div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="btn" style="padding:10px 18px;font-size:15px">Plant a feeling</button><button class="btn" style="padding:10px 18px;font-size:15px;background:transparent;color:#4F7A44;box-shadow:inset 0 0 0 1.5px #5E7D4F">Wander in</button></div>
+      </div>
+    </div>
+  </div>
+  <p class="note">The most intimate: an open diary with a pressed flower, washi tape, a gentle prompt and a taped-in snapshot of the live garden. Tapping the photo "turns the page" into the full garden. Great tone, but one extra step before the garden.</p>
+</section>
+
+<script>
+  const NS='http://www.w3.org/2000/svg'; let seed=7; const R=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+  const kinds=['daisy','sunflower','rose','lav','bell','cosmos','daisy','rose','lav'];
+  function scatter(id,n,x0,x1,y0,y1,scale0=.7,scale1=1.3,avoid){const g=document.getElementById(id); const pts=[];for(let i=0;i<n;i++){const x=x0+R()*(x1-x0),y=y0+R()*(y1-y0); if(avoid&&avoid(x,y)){continue} pts.push([x,y])} pts.sort((a,b)=>a[1]-b[1]).forEach(([x,y],i)=>{const u=document.createElementNS(NS,'use');u.setAttribute('href','#'+kinds[i%kinds.length]);const s=scale0+(y-y0)/(y1-y0)*(scale1-scale0);u.setAttribute('transform',`translate(${x} ${y}) scale(${s})`);g.appendChild(u)})}
+  scatter('g1f',26,200,620,330,490,.55,1.1);
+  scatter('g2f',46,20,780,190,470,.55,1.45,(x,y)=>(x>470&&x<770&&y>340&&y<480)||(x>90&&x<340&&y<300)||(y>385&&x>120&&x<680));
+  scatter('g3f',16,190,610,250,330,.5,.8,(x,y)=>(x>440&&x<590&&y>250&&y<310)||(x>280&&x<340));
+  scatter('g4f',18,430,730,260,430,.5,.95,(x,y)=>(x>560&&x<760&&y>330&&y<410)||(x>480&&x<600&&y<300));
+  // foliage leaves for the gate wall + roses on the arch
+  const L=document.getElementById('g1leaves'); for(let i=0;i<120;i++){const e=document.createElementNS(NS,'ellipse');const x=R()*800,y=R()*500;if(x>250&&x<550&&y>120)continue;e.setAttribute('cx',x);e.setAttribute('cy',y);e.setAttribute('rx',14+R()*16);e.setAttribute('ry',7+R()*8);e.setAttribute('fill',['#2C8A47','#3FA352','#1a5f34','#58B45A'][i%4]);e.setAttribute('transform',`rotate(${R()*180} ${x} ${y})`);L.appendChild(e)}
+  const RS=document.getElementById('g1roses'); [[262,300],[270,200],[290,120],[330,80],[400,60],[470,80],[510,120],[530,200],[540,300],[250,380],[550,400]].forEach(([x,y],i)=>{RS.insertAdjacentHTML('beforeend',`<g transform="translate(${x} ${y+30}) scale(${.9+R()*.5})"><use href="#rose" transform="translate(0 0) scale(1.1)"/></g>`)});
+  const P=document.getElementById('g1petals'); for(let i=0;i<16;i++){const e=document.createElementNS(NS,'ellipse');e.setAttribute('class','petal');e.setAttribute('cx',R()*800);e.setAttribute('cy',0);e.setAttribute('rx',6+R()*4);e.setAttribute('ry',3.6);e.setAttribute('fill',['#F7C9CF','#FFF0E6','#F29AB0'][i%3]);e.style.animationDuration=(9+R()*9)+'s';e.style.animationDelay=(-R()*14)+'s';P.appendChild(e)}
+  const S=document.getElementById('g3stars'); for(let i=0;i<50;i++){const c=document.createElementNS(NS,'circle');c.setAttribute('cx',R()*800);c.setAttribute('cy',R()*220);c.setAttribute('r',.8+R()*1.4);c.setAttribute('fill','#fff');c.setAttribute('class','tw');c.style.animationDelay=(R()*3)+'s';S.appendChild(c)}
+  const Q=document.getElementById('g3pet'); for(let i=0;i<10;i++){const e=document.createElementNS(NS,'ellipse');e.setAttribute('class','petal');e.setAttribute('cx',150+R()*500);e.setAttribute('cy',60);e.setAttribute('rx',6);e.setAttribute('ry',3.4);e.setAttribute('fill',['#F7C9CF','#FFF0E6'][i%2]);e.style.animationDuration=(10+R()*8)+'s';e.style.animationDelay=(-R()*14)+'s';Q.appendChild(e)}
+</script>
+</body>
+</html>
