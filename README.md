@@ -3,6 +3,16 @@
 A calm, private mood garden. Works fully offline and without an account; gardens are saved in the browser.
 Optional: sign in with an email link to sync gardens across devices.
 
+## Screenshots
+
+| A garden that grows with you | Pause and check in |
+| --- | --- |
+| ![Mood Garden home screen](screenshots/garden.png) | ![Mood check-in](screenshots/check-in.png) |
+
+### Greenhouse collection
+
+![Mood Garden greenhouse collection](screenshots/collection.png)
+
 ```bash
 npm install
 npm run dev      # http://localhost:5199
