@@ -102,11 +102,17 @@ export function useAuth() {
     const sb = await client()
     const { error } = await sb.auth.verifyOtp({ email: addr.trim(), token: otp.trim(), type: 'email' })
     if (error) throw error
+    const { data, error: sessionError } = await sb.auth.getSession()
+    if (sessionError) throw sessionError
+    const verifiedEmail = data.session?.user.email
+    if (!verifiedEmail) throw new Error('The code was accepted, but no signed-in session was created. Please try again.')
+    setEmail(verifiedEmail)
   }, [])
   const signOut = useCallback(async () => {
     const sb = await client()
     const { error } = await sb.auth.signOut()
     if (error) throw error
+    setEmail(null)
   }, [])
 
   return { email, ready, authError, signIn, verifyOtp, signOut }
