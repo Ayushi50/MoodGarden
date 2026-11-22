@@ -14,11 +14,18 @@ const when = (t: number) => new Date(t).toLocaleDateString(undefined, { day: 'nu
 export function GardensSheet({ profiles, activeId, onClose, onSwitch, onCreate, onRename, onRemove, onExport, onImport, cloud }: Props) {
   const [mail, setMail] = useState('')
   const [sent, setSent] = useState(false)
+  const [code, setCode] = useState('')
   const [cErr, setCErr] = useState('')
   const [busy, setBusy] = useState(false)
   const send = async () => {
     setBusy(true); setCErr('')
-    try { await cloud.signIn(mail); setSent(true) } catch (e) { setCErr(e instanceof Error ? e.message : 'Could not send the link.') }
+    try { await cloud.signIn(mail); setSent(true) } catch (e) { setCErr(e instanceof Error ? e.message : 'Could not send the code.') }
+    setBusy(false)
+  }
+  const verify = async () => {
+    setBusy(true); setCErr('')
+    try { await cloud.verifyOtp(mail, code); setSent(false); setCode('') }
+    catch (e) { setCErr(e instanceof Error ? e.message : 'Could not verify the code.') }
     setBusy(false)
   }
   const [name, setName] = useState('')
@@ -87,6 +94,8 @@ export function GardensSheet({ profiles, activeId, onClose, onSwitch, onCreate, 
       {cloud.enabled && (
         <>
           <h3 style={{ marginTop: 20 }}>Sync across devices <span className="hint" style={{ fontWeight: 400 }}>(optional)</span></h3>
+          {!cloud.ready && <p className="hint" role="status">Preparing secure sign-in…</p>}
+          {cloud.authError && <p className="hint" role="status" style={{ color: '#a0392b', fontWeight: 600 }}>Sign-in is unavailable: {cloud.authError}</p>}
           {cloud.email ? (
             <>
               <p className="hint" style={{ margin: '0 0 10px' }}>Signed in as {cloud.email}. Your gardens are copied to your account so they follow you to your other devices.{' '}
@@ -94,19 +103,32 @@ export function GardensSheet({ profiles, activeId, onClose, onSwitch, onCreate, 
               {cloud.status === 'error' && <p className="hint" role="status" style={{ color: '#a0392b', fontWeight: 600 }}>Could not sync: {cloud.error}. Your gardens are safe on this device.</p>}
               <div className="row">
                 <button className="btn ghost" onClick={cloud.syncNow} disabled={cloud.status === 'syncing'}>Sync now</button>
-                <button className="btn ghost" onClick={() => { void cloud.signOut() }}>Sign out</button>
+                <button className="btn ghost" onClick={() => { void cloud.signOut().catch(e => setCErr(e instanceof Error ? e.message : 'Could not sign out.')) }}>Sign out</button>
               </div>
+              {cErr && <p className="hint" role="status" style={{ marginTop: 8, color: '#a0392b', fontWeight: 600 }}>{cErr}</p>}
               <p className="hint" style={{ marginTop: 8 }}>Signing out keeps everything on this device and stops syncing.</p>
             </>
           ) : sent ? (
-            <p className="hint" role="status" style={{ color: 'var(--moss-d)', fontWeight: 600 }}>Check your email for a sign-in link, then open it on this device. No password needed.</p>
+            <>
+              <p className="hint" role="status" style={{ color: 'var(--moss-d)', fontWeight: 600 }}>A sign-in code is on its way to {mail}. Enter it below. No password needed.</p>
+              <div className="row">
+                <input className="field" inputMode="numeric" autoComplete="one-time-code" maxLength={8} style={{ flex: 1, minWidth: 140 }} placeholder="Email code" value={code}
+                  onChange={e => setCode(e.target.value.replace(/\s/g, ''))} onKeyDown={e => { if (e.key === 'Enter' && code.trim() && !busy) void verify() }} />
+                <button className="btn" disabled={!code.trim() || busy || !cloud.ready} onClick={() => void verify()}>{busy ? 'Checking…' : 'Verify and sign in'}</button>
+              </div>
+              <div className="row" style={{ marginTop: 8 }}>
+                <button className="btn ghost sm" disabled={busy || !cloud.ready} onClick={() => void send()}>{busy ? 'Sending…' : 'Send a new code'}</button>
+                <button className="btn ghost sm" disabled={busy} onClick={() => { setSent(false); setCode(''); setCErr('') }}>Use a different email</button>
+              </div>
+              {cErr && <p className="hint" role="status" style={{ marginTop: 8, color: '#a0392b', fontWeight: 600 }}>{cErr}</p>}
+            </>
           ) : (
             <>
               <p className="hint" style={{ margin: '0 0 10px' }}>Gardens stay private on this device unless you choose to sync. Signing in with your email copies them to your account so you can open them on another device. Synced gardens are stored on a cloud database (not end-to-end encrypted). The app works fully without it.</p>
               <div className="row">
                 <input className="field" type="email" style={{ flex: 1, minWidth: 160 }} placeholder="you@example.com" value={mail} autoComplete="email" onChange={e => setMail(e.target.value)}
-                  onKeyDown={e => { if (e.key === 'Enter' && mail.includes('@') && !busy) void send() }} />
-                <button className="btn" disabled={!mail.includes('@') || busy} onClick={() => void send()}>{busy ? 'Sending…' : 'Email me a link'}</button>
+                  onKeyDown={e => { if (e.key === 'Enter' && mail.includes('@') && !busy && cloud.ready) void send() }} />
+                <button className="btn" disabled={!mail.includes('@') || busy || !cloud.ready} onClick={() => void send()}>{busy ? 'Sending…' : 'Email me a code'}</button>
               </div>
               {cErr && <p className="hint" role="status" style={{ marginTop: 8, color: '#a0392b', fontWeight: 600 }}>{cErr}</p>}
             </>

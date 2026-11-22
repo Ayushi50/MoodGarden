@@ -1,7 +1,7 @@
--- Run once in the Supabase dashboard: SQL Editor -> New query -> paste -> Run.
--- One row per garden per user. Row Level Security means a signed-in user can only ever see their own rows.
+-- Run once in the Neon SQL Editor after enabling Neon Auth and the Data API.
+-- One row per garden per user; RLS restricts access to the signed-in user's rows.
 create table if not exists public.gardens (
-  user_id    uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  user_id    uuid not null default auth.user_id()::uuid references neon_auth."user" (id) on delete cascade,
   id         text not null,                 -- cloud id of the garden (stable across devices)
   name       text not null default '',
   data       jsonb,                         -- the whole garden state
@@ -15,5 +15,8 @@ alter table public.gardens enable row level security;
 drop policy if exists "own gardens" on public.gardens;
 create policy "own gardens" on public.gardens
   for all to authenticated
-  using (auth.uid() = user_id)
-  with check (auth.uid() = user_id);
+  using ((select auth.user_id()::uuid) = user_id)
+  with check ((select auth.user_id()::uuid) = user_id);
+
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on public.gardens to authenticated;

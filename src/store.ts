@@ -154,8 +154,8 @@ function readState(id: string): State | null {
 }
 export type CloudStatus = 'idle' | 'syncing' | 'ok' | 'error'
 export interface Cloud {
-  enabled: boolean; ready: boolean; email: string | null; status: CloudStatus; at?: number; error?: string
-  signIn: (email: string) => Promise<void>; signOut: () => Promise<void>; syncNow: () => void
+  enabled: boolean; ready: boolean; email: string | null; status: CloudStatus; at?: number; error?: string; authError?: string
+  signIn: (email: string) => Promise<void>; verifyOtp: (email: string, otp: string) => Promise<void>; signOut: () => Promise<void>; syncNow: () => void
 }
 
 export function useGarden() {
@@ -306,8 +306,8 @@ export function useGarden() {
   }, [email, syncAll])
 
   const cloudApi: Cloud = {
-    enabled: syncEnabled, ready: auth.ready, email, status: cloud.status, at: cloud.at, error: cloud.error,
-    signIn: auth.signIn, signOut: auth.signOut, syncNow: () => { void syncAll() },
+    enabled: syncEnabled, ready: auth.ready, email, status: cloud.status, at: cloud.at, error: cloud.error, authError: auth.authError,
+    signIn: auth.signIn, verifyOtp: auth.verifyOtp, signOut: auth.signOut, syncNow: () => { void syncAll() },
   }
   return { state, update, reset, profiles: idx.list, activeId: idx.active, switchTo, create, rename, remove, exportGarden, importGarden, cloud: cloudApi }
 }

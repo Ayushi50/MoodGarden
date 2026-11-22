@@ -1,17 +1,38 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { SupabaseClient } from '@supabase/supabase-js'
+import type { createClient } from '@neon/neon-js/supabase'
 
-/* Optional cloud sync (Supabase free tier). Everything here is inert unless both env vars are set,
-   and the supabase library is only downloaded in that case. The app is fully usable signed out. */
-const URL_ = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const KEY_ = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
-export const syncEnabled = !!(URL_ && KEY_)
+/* Optional Neon Auth and Data API sync; without a project URL the app stays local-only. */
+const AUTH_URL = import.meta.env.VITE_NEON_AUTH_URL as string | undefined
+const DATA_API_URL = import.meta.env.VITE_NEON_DATA_API_URL as string | undefined
+export const syncEnabled = !!(AUTH_URL && DATA_API_URL)
 
-let clientP: Promise<SupabaseClient> | null = null
-function client(): Promise<SupabaseClient> {
+interface GardenRow {
+  id: string
+  name: string
+  data: unknown
+  deleted: boolean
+  updated_at: string
+}
+interface Database {
+  public: {
+    Tables: {
+      gardens: {
+        Row: GardenRow
+        Insert: Partial<GardenRow>
+        Update: Partial<GardenRow>
+        Relationships: []
+      }
+    }
+  }
+}
+
+type NeonClient = ReturnType<typeof createClient<Database>>
+let clientP: Promise<NeonClient> | null = null
+function client(): Promise<NeonClient> {
   if (!syncEnabled) return Promise.reject(new Error('Sync is not configured.'))
-  return (clientP ??= import('@supabase/supabase-js').then(m => m.createClient(URL_!, KEY_!, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+  return (clientP ??= import('@neon/neon-js/supabase').then(m => m.createClient<Database>({
+    auth: { url: AUTH_URL! },
+    dataApi: { url: DATA_API_URL! },
   })))
 }
 
@@ -21,13 +42,17 @@ export async function listMeta(): Promise<RemoteMeta[]> {
   const sb = await client()
   const { data, error } = await sb.from('gardens').select('id,updated_at,deleted')
   if (error) throw error
-  return (data || []).map(r => ({ id: r.id as string, updatedAt: Date.parse(r.updated_at as string), deleted: !!r.deleted }))
+  return (data || []).map((r: { id: string; updated_at: string; deleted: boolean }) => ({
+    id: r.id,
+    updatedAt: Date.parse(r.updated_at),
+    deleted: !!r.deleted,
+  }))
 }
 export async function fetchGarden(id: string): Promise<{ name: string; data: unknown }> {
   const sb = await client()
   const { data, error } = await sb.from('gardens').select('name,data').eq('id', id).single()
   if (error) throw error
-  return { name: data.name as string, data: data.data }
+  return { name: (data as unknown as GardenRow).name, data: (data as unknown as GardenRow).data }
 }
 export async function pushGarden(id: string, name: string, data: unknown, at: number) {
   const sb = await client()
@@ -43,24 +68,46 @@ export async function pushTombstone(id: string, at: number) {
 export function useAuth() {
   const [email, setEmail] = useState<string | null>(null)
   const [ready, setReady] = useState(!syncEnabled)
+  const [authError, setAuthError] = useState<string>()
 
   useEffect(() => {
     if (!syncEnabled) return
     let dead = false; let off = () => {}
-    client().then(sb => {
-      sb.auth.getSession().then(({ data }) => { if (!dead) { setEmail(data.session?.user.email ?? null); setReady(true) } })
-      const { data } = sb.auth.onAuthStateChange((_e, s) => { if (!dead) setEmail(s?.user.email ?? null) })
-      off = () => data.subscription.unsubscribe()
-    }).catch(() => { if (!dead) setReady(true) })
+    client().then(async sb => {
+      const { data, error } = await sb.auth.getSession()
+      if (error) throw error
+      if (!dead) { setEmail(data.session?.user.email ?? null); setReady(true) }
+      const { data: subscription } = sb.auth.onAuthStateChange((_event: unknown, session: { user: { email?: string } } | null) => {
+        if (!dead) {
+          setEmail(session?.user.email ?? null)
+          setAuthError(undefined)
+        }
+      })
+      off = () => subscription.subscription.unsubscribe()
+    }).catch(e => {
+      if (!dead) {
+        setAuthError(e instanceof Error ? e.message : 'Could not connect to sign-in.')
+        setReady(true)
+      }
+    })
     return () => { dead = true; off() }
   }, [])
 
   const signIn = useCallback(async (addr: string) => {
     const sb = await client()
-    const { error } = await sb.auth.signInWithOtp({ email: addr.trim(), options: { emailRedirectTo: window.location.origin + window.location.pathname } })
+    const { error } = await sb.auth.signInWithOtp({ email: addr.trim() })
     if (error) throw error
   }, [])
-  const signOut = useCallback(async () => { const sb = await client(); await sb.auth.signOut() }, [])
+  const verifyOtp = useCallback(async (addr: string, otp: string) => {
+    const sb = await client()
+    const { error } = await sb.auth.verifyOtp({ email: addr.trim(), token: otp.trim(), type: 'email' })
+    if (error) throw error
+  }, [])
+  const signOut = useCallback(async () => {
+    const sb = await client()
+    const { error } = await sb.auth.signOut()
+    if (error) throw error
+  }, [])
 
-  return { email, ready, signIn, signOut }
+  return { email, ready, authError, signIn, verifyOtp, signOut }
 }
